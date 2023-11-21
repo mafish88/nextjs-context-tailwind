@@ -1,20 +1,22 @@
 "use client"
 import { useContext } from "react"
 import { AuthContext } from "@/context/AuthContext"
-
+import { useRouter } from "next/navigation"
 const defaultUser = {
   name: 'John Savinosaurus',
   role: 'admin',
 }
 
 export default function Login() {
+const router = useRouter()
 
   const { setUser } = useContext(AuthContext)
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
-    setUser(defaultUser)
+    await setUser(defaultUser)
     // TODO: redirect to dashboard
+    router.push('/dashboard')
   }
 
   return (
